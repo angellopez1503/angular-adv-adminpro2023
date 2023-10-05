@@ -9,10 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 
-import { NgChartsModule } from 'ng2-charts';
-
-
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -26,7 +22,7 @@ import { NgChartsModule } from 'ng2-charts';
     RouterModule,
     FormsModule,
     ComponentsModule,
-    NgChartsModule
+
 
   ],
   exports: [
