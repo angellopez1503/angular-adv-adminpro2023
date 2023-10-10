@@ -4,8 +4,7 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-
-const customInitFunctions = () => {
+ const customInitFunctions = () => {
 
   $(function() {
     "use strict";

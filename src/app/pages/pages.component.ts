@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 
- declare function customInitFunctions():any
+declare function customInitFunctions(): any;
 
 @Component({
   selector: 'app-pages',
@@ -9,18 +9,11 @@ import { SettingsService } from '../services/settings.service';
   styleUrls: ['./pages.component.css'],
 })
 export class PagesComponent implements OnInit {
-
-
-  constructor(
-    private settingsService:SettingsService
-  ){}
+  constructor(private settingsService: SettingsService) {}
 
   ngOnInit(): void {
-
-    customInitFunctions()
+    setTimeout(() => {
+      customInitFunctions();
+    }, 50);
   }
-
-
 }
-
-
