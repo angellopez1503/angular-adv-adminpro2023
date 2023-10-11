@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -30,6 +30,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     RouterModule,
     FormsModule,
     ComponentsModule,
+    ReactiveFormsModule
+
 
   ],
   exports: [
