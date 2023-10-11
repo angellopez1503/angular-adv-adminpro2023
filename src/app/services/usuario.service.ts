@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
+import { Usuario } from '../models/usuario.model';
 
 declare const google: any;
 const base_url = environment.base_url;
@@ -13,21 +14,22 @@ const base_url = environment.base_url;
   providedIn: 'root',
 })
 export class UsuarioService {
-  
+  public usuario?: Usuario;
+
   constructor(private http: HttpClient, private router: Router) {}
 
-  
-
   logout() {
-    this.validarToken()
     localStorage.removeItem('token');
-
-    google.accounts.id.revoke('angellopez15luisa@gmail.com', () => {
+    google.accounts.id.revoke(this.usuario?.email, () => {
       this.router.navigateByUrl('/login');
     });
   }
 
   validarToken(): Observable<boolean> {
+    google.accounts.id.initialize({
+      client_id:
+        '127965276130-e0h5g2hpkfjel4ld1oiiul37evdcqjih.apps.googleusercontent.com',
+    });
     const token = localStorage.getItem('token') || '';
 
     return this.http
@@ -37,10 +39,13 @@ export class UsuarioService {
         },
       })
       .pipe(
-        tap((res: any) => {
+        map((res: any) => {
+          const { email, google, name, role, img = '', uid } = res.usuario;
+          this.usuario = new Usuario(name, email, '', img, google, role, uid);
           localStorage.setItem('token', res.token);
+          return true
         }),
-        map((res) => true),
+      
         catchError((err) => of(false))
       );
   }
