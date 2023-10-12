@@ -2,13 +2,13 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input type="text" class="form-control" placeholder="Buscar usuario" />
+        <input #txtTermino (keyup)="buscar(txtTermino.value)" type="text" class="form-control" placeholder="Buscar usuario" />
       </div>
     </div>
   </div>
 </div>
 
-<div class="row animated fadeIn fast">
+<div *ngIf="cargando"  class="row animated fadeIn fast">
   <div class="col-12">
     <div class="alert alert-info text-center" role="alert">
       <h4 class="alert-heading">Cargando</h4>
@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="!cargando" class="row animated fadeIn fast">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -53,7 +53,7 @@
                   >
                 </td>
 
-                <td class="text-nowrap">
+                <td class="text-nowrap text-center">
                   <a
                     href="#"
                     data-toggle="tooltip"
@@ -73,12 +73,14 @@
             </tbody>
           </table>
         </div>
-        <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
-          Anterior
-        </button>
-        <button (click)="cambiarPagina(5)" class="btn btn-secondary">
-          Siguiente
-        </button>
+        <div *ngIf="txtTermino.value.length === 0">
+          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+            Anterior
+          </button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   </div>
