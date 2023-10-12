@@ -8,6 +8,7 @@ declare function customInitFunctions(): any;
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  
   title = 'adminpro';
 
   constructor() {}
