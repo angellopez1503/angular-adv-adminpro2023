@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { tap, map, Observable, catchError, of } from 'rxjs';
+import { tap, map, Observable, catchError, of} from 'rxjs';
 import { Router } from '@angular/router';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Usuario } from '../models/usuario.model';
+import { CargarUsuarios } from '../interfaces/cargar-usuarios.interface';
 
 declare const google: any;
 const base_url = environment.base_url;
@@ -24,6 +25,14 @@ export class UsuarioService {
 
   get uid():string{
     return this.usuario?.uid || ''
+  }
+
+  get headers(){
+    return {
+      headers:{
+        'x-token':this.token
+      }
+    }
   }
 
   logout() {
@@ -97,4 +106,24 @@ export class UsuarioService {
       })
     );
   }
+
+  cargarUsuarios(desde:number = 0){
+    
+    const url = `${base_url}/usuarios?desde=${desde}`
+    return this.http.get<CargarUsuarios>(url,this.headers)
+    .pipe(
+      map(
+        res => {
+         const usuarios = res.usuarios.map(user => new Usuario(user.name,user.email,'',user.img,user.google,user.role,user.uid))
+          return {
+            total:res.total,
+            usuarios
+          }
+        }
+      )
+    )
+
+  }
+
+
 }
