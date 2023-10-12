@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { tap, map, Observable, catchError, of} from 'rxjs';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
@@ -122,6 +123,12 @@ export class UsuarioService {
         }
       )
     )
+  }
+
+  eliminarUsuario(usuario:Usuario){
+   
+    const url = `${base_url}/usuarios/${usuario.uid}`
+    return this.http.delete(url,this.headers)
   }
 
 }

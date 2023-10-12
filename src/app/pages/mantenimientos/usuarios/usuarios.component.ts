@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+
 import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
-import { ThisReceiver } from '@angular/compiler';
 import { BusquedasService } from '../../../services/busquedas.service';
 
 @Component({
@@ -49,11 +50,37 @@ export class UsuariosComponent implements OnInit {
 
   buscar(termino: string) {
     if (termino.length === 0) {
-      this.usuarios = this.usuariosTemp
+      this.usuarios = this.usuariosTemp;
       return;
     }
     this.busquedasService.buscar('usuarios', termino).subscribe((res) => {
       this.usuarios = res;
+    });
+  }
+
+  eliminarUsuario(usuario: Usuario) {
+
+    if(usuario.uid === this.usuarioService.uid){
+      Swal.fire('Error','No puede borrarse asi mismo','error')
+      return  
+    }
+    Swal.fire({
+      title: '¿Borrar usuario?',
+      text: `Esta a punto de borrar a ${usuario.name}`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Si, borrarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.eliminarUsuario(usuario).subscribe((res) => {
+          Swal.fire(
+            'Usuario borrado',
+            `${usuario.name} fue eliminado correctamente`,
+            'success'
+          );
+          this.cargarUsuarios();
+        });
+      }
     });
   }
 }
