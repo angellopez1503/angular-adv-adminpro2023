@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from '../../../services/busquedas.service';
+import { ModalImagenService } from '../../../services/modal-imagen.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,7 +20,8 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private busquedasService: BusquedasService
+    private busquedasService: BusquedasService,
+    private modalImagenService:ModalImagenService
   ) {}
 
   ngOnInit(): void {
@@ -83,4 +85,18 @@ export class UsuariosComponent implements OnInit {
       }
     });
   }
+
+  cambiarRole(usuario:Usuario){
+     this.usuarioService.guardarUsuario(usuario).subscribe(
+      res => {
+        console.log(res);
+      }
+     )
+  }
+
+  abrirModal(usuario:Usuario){
+    console.log(usuario);
+    this.modalImagenService.abrirModal()
+  }
+
 }
