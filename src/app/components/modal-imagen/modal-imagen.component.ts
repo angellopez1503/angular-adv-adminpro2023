@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalImagenService } from '../../services/modal-imagen.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-imagen',
@@ -13,7 +15,8 @@ export class ModalImagenComponent {
 
 
   constructor(
-    public modalImagenService:ModalImagenService
+    public modalImagenService:ModalImagenService,
+    public fileUploadService:FileUploadService
   ){}
  
 
@@ -38,6 +41,26 @@ export class ModalImagenComponent {
       this.imgTemp = reader.result;
       console.log(reader.result);
     };
+  }
+
+  subirImagen() {
+
+    const id = this.modalImagenService.id
+    const tipo = this.modalImagenService.tipo
+    this.fileUploadService
+      .actualizarFoto(this.imagenSubir, tipo, id)
+      .then((data) => {
+        if (data.ok) {
+          Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
+          this.modalImagenService.nuevaImagen.emit(data.nombreArchivo)
+          this.cerrarModal()
+        } else {
+          Swal.fire('Error', data.msg, 'error');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
 
