@@ -44,12 +44,7 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    google.accounts.id.initialize({
-      client_id:
-        '127965276130-e0h5g2hpkfjel4ld1oiiul37evdcqjih.apps.googleusercontent.com',
-    });
-     
-
+    
     return this.http
       .get(`${base_url}/login/renew`, {
         headers: {
@@ -57,15 +52,26 @@ export class UsuarioService {
         },
       })
       .pipe(
+        tap(
+          res => {
+            google.accounts.id.initialize({
+              client_id:
+                '127965276130-e0h5g2hpkfjel4ld1oiiul37evdcqjih.apps.googleusercontent.com',
+            });
+          }
+        ),
         map((res: any) => {
           const { email, google, name, role, img = '', uid } = res.usuario;
           this.usuario = new Usuario(name, email, '', img, google, role, uid);
+         
           localStorage.setItem('token', res.token);
           return true
         }),
       
         catchError((err) => of(false))
       );
+
+      
   }
 
   crearUsuario(formData: RegisterForm) {

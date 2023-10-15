@@ -12,7 +12,7 @@
               <img *ngIf="!imgTemp" [src]="modalImagenService.img" alt="" class="img-avatar" />
               <img *ngIf="imgTemp" [src]="imgTemp" alt="" class="img-avatar" />
             </div>
-            <input type="file" (change)="cambiarImagen($event)" />
+            <input #file type="file" (change)="cambiarImagen($event)" />
             </div>
             <div class="modal-footer">
                 <button (click)="cerrarModal()" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

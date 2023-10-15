@@ -12,7 +12,7 @@ export class FileUploadService {
   
 
   async actualizarFoto(
-    archivo:File,
+    archivo:File|undefined|any,
     tipo:'usuarios'|'medicos'|'hospitales',
     id:string
   ){

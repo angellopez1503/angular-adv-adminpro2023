@@ -12,6 +12,8 @@ export class ModalImagenService {
   public img?: string;
 
   public nuevaImagen:EventEmitter<string> = new EventEmitter<string>()
+  public emitReset:EventEmitter<string> = new EventEmitter<string>()
+  
 
   public get ocultarModal() {
     return this._ocultarModal;

@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input type="text" class="form-control" placeholder="Buscar hospital" />
+        <input type="text" class="form-control" placeholder="Buscar hospital" #txtTermino (keyup)="buscar(txtTermino.value)" autocomplete="off" />
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="col">
           <div class="text-right">
-            <button class="btn btn-primary">
+            <button (click)="abriModal()" class="btn btn-primary">
               <i class="fa fa-hospital-o"></i>
               Crear Hospital
             </button>
@@ -42,7 +42,7 @@
               <tr>
                 <th class="w100">Foto</th>
                 <th>Nombre</th>
-                <th class="text-nowrap">Acciones</th>
+                <th class="text-nowrap w100">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,8 @@
                   <img
                     [src]="hospital.img | imagen : 'hospitales'"
                     [alt]="hospital.name"
-                    class="avatar cursor"
+                    class="w100 cursor"
+                    (click)="abrirModalImagen(hospital)"
                   />
                 </td>
                 <td>
@@ -65,15 +66,17 @@
 
                 <td class="text-nowrap text-center">
                   <a
-                    href="#"
+                  (click)="guardarCambios(hospital)"
                     data-toggle="tooltip"
+                    class="cursor"
                     data-original-title="Guardar cambios"
                   >
                     <i class="fa fa-pencil text-inverse m-r-10"></i>
                   </a>
                   <a
-                    href="#"
+                    (click)="eliminarHospital(hospital)"
                     data-toggle="tooltip"
+                    class="cursor"
                     data-original-title="Borrar"
                   >
                     <i class="fa fa-close text-danger"></i>

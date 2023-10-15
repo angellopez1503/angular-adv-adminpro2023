@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IncrementadorComponent } from './incrementador/incrementador.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DonaComponent } from './dona/dona.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ModalImagenComponent } from './modal-imagen/modal-imagen.component';
+import { ModalFormHospitalComponent } from './modal-form-hospital/modal-form-hospital.component';
 
 
 
@@ -12,17 +13,20 @@ import { ModalImagenComponent } from './modal-imagen/modal-imagen.component';
   declarations: [
     IncrementadorComponent,
     DonaComponent,
-    ModalImagenComponent
+    ModalImagenComponent,
+    ModalFormHospitalComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    NgChartsModule
+    NgChartsModule,
+    ReactiveFormsModule
   ],
   exports:[
     IncrementadorComponent,
     DonaComponent,
-    ModalImagenComponent
+    ModalImagenComponent,
+    ModalFormHospitalComponent
   ]
 })
 export class ComponentsModule { }
