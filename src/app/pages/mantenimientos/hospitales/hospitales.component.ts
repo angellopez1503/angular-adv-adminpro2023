@@ -2,7 +2,6 @@ import { ModalImagenService } from './../../../services/modal-imagen.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HospitalService } from '../../../services/hospital.service';
 import { Hospital } from '../../../models/hospital.model';
-import { TimeScale } from 'chart.js';
 import Swal from 'sweetalert2';
 import { ModalFormHospitalService } from '../../../services/modal-form-hospital.service';
 import { Subscription, delay } from 'rxjs';

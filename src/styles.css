@@ -23,13 +23,19 @@
   height: 200px;
 }
 
+.w75 {
+  width: 75px;
+}
+
 .w100 {
   width: 100px;
 }
+
 .w140 {
   width: 140px;
 }
-.w200{
+
+.w200 {
   width: 200px;
 }
 
@@ -38,7 +44,7 @@
   width: 50px;
 }
 
-.fondo-modal-imagen{
+.fondo-modal-imagen {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0px;
@@ -48,6 +54,6 @@
   z-index: 999;
 }
 
-.oculto{
+.oculto {
   display: none;
 }
